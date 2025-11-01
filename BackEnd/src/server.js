@@ -14,6 +14,7 @@ const _dirname = path.resolve();
 
 app.use(express.urlencoded({ extended: true })); // To parse form data
 app.use(cookieParser());
+app.use(express.json()); // To parse JSON data
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/message", messageRoute);
