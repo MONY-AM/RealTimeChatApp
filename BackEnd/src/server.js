@@ -5,8 +5,7 @@ import messageRoute from "./routes/message.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { connectDB } from "./lib/db.js";
-
-dotenv.config();
+import { ENV } from "./lib/env.js";
 
 const app = express();
 
@@ -20,7 +19,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/message", messageRoute);
 
 //make ready for production
-if (process.env.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(_dirname, "../FrontEnd/dist")));
 
   app.get("*", (_, res) => {
@@ -28,8 +27,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(ENV.PORT, () => {
+  console.log(`Server is running on port ${ENV.PORT}`);
   connectDB();
 });
 
